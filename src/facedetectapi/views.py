@@ -35,7 +35,7 @@ class DetectFaceAPI(views.View):
             with open(file_temp, "wb") as file:
                 file.write(base64.b64decode(img_data))
         except (TypeError, ValueError):
-            raise ValidationError("Data not supported")
+            raise ValidationError("data not supported")
 
         # Face detection
         classifier  = cv2.CascadeClassifier(
@@ -65,19 +65,19 @@ class DetectFaceAPI(views.View):
 
                 return JsonResponse({
                     'status': 'success',
-                    'message': "Face detected",
+                    'message': "face detected",
                     'total found': len(faces),
                     'faces': "data:image/png;base64," + img_str
                 }, status=200)
 
             return JsonResponse({
                     'status': 'success',
-                    'message': "Face detected"
+                    'message': "face detected"
                 }, status=200)
         
         return JsonResponse({
             'status': 'success',
-            'message': "No face detected"
+            'message': "no face detected"
         }, status=200)
 
     @method_decorator(csrf_exempt)
